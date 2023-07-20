@@ -13,11 +13,11 @@ vmap $vlib_dir/work
 
 echo "start compile"
 #compile
-vlog -sv -work $vlib_dir/work -f $file_list_dir/src_files.f
+vlog +acc=rn -work $vlib_dir/work -f $file_list_dir/src_files.f
 
 echo "start execute"
 #execute
 #console mode
-vsim -c $vlib_dir/work.Top_test -t ns -64 -do wave.do -do "run -all"
+vsim -c $vlib_dir/work.testbench -t ns -64 -do wave.do -do "run -all"
 #gui mode
-#vsim $vlib_dir/work.Top_test -t ns -64 -do wave.do -do "run -all"
+#vsim $vlib_dir/work.testbench -t ns -64 -do wave.do -do "run -all"
