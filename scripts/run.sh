@@ -18,6 +18,6 @@ vlog +acc=rn -work $vlib_dir/work -f $file_list_dir/src_files.f
 echo "start execute"
 #execute
 #console mode
-vsim -c $vlib_dir/work.testbench -t ns -64 -do wave.do -do "run -all"
+vsim -c $vlib_dir/work.testbench -t ns -64 -do "run -all"
 #gui mode
-#vsim $vlib_dir/work.testbench -t ns -64 -do wave.do -do "run -all"
+#vsim $vlib_dir/work.testbench -t ns -64 -do "set NoQuitOnFinish 1" -do wave.do -do "run -all"

@@ -19,7 +19,10 @@ class v1_test extends uvm_test;
   endfunction : build_phase
 
   task run_phase(uvm_phase phase);
+    phase.raise_objection(this);
     m_seq.start(m_env.agenta.m_sequencer);
+    m_seq.start(m_env.agentb.m_sequencer);
+    phase.drop_objection(this);
   endtask : run_phase
 
 endclass : v1_test

@@ -10,14 +10,17 @@ class seq extends uvm_sequence#(seq_item);
   endfunction
   
   virtual task body();
-    //forever begin    
-      req = seq_item::type_id::create("req");  //create the req (seq item)
-      wait_for_grant();                            //wait for grant
+    //forever begin
+      int count = 10;
+      for (int i = 0; i < count; i++) begin
+        req = seq_item::type_id::create("req");  //create the req (seq item)
+        wait_for_grant();                            //wait for grant
 
-      req.rdata = 5;
+        req.rdata = i;
 
-      send_request(req);                           //send req to driver
-      wait_for_item_done();                        //wait for item done from driver
+        send_request(req);                           //send req to driver
+        wait_for_item_done();                        //wait for item done from driver
+      end
     //end
   endtask
 endclass
