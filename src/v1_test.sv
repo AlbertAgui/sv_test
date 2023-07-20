@@ -19,9 +19,16 @@ class v1_test extends uvm_test;
   endfunction : build_phase
 
   task run_phase(uvm_phase phase);
+    int count = 10;
     phase.raise_objection(this);
-    m_seq.start(m_env.agenta.m_sequencer);
-    m_seq.start(m_env.agentb.m_sequencer);
+    for(int i = 0; i < count; ++i) begin
+      if((m_seq.get_idx % 2) == 0) begin
+        m_seq.start(m_env.agenta.m_sequencer);
+      end
+      else begin
+        m_seq.start(m_env.agentb.m_sequencer);
+      end
+    end
     phase.drop_objection(this);
   endtask : run_phase
 
