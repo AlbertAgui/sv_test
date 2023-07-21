@@ -20,15 +20,19 @@ class v1_test extends uvm_test;
 
   task run_phase(uvm_phase phase);
     int count = 10;
+    int id = -1;
+    
     phase.raise_objection(this);
+
+    id = m_seq.get_next_seqr_target();
     for(int i = 0; i < count; ++i) begin
-      if((m_seq.get_idx % 2) == 0) begin
-        m_seq.start(m_env.agenta.m_sequencer);
-      end
-      else begin
-        m_seq.start(m_env.agentb.m_sequencer);
-      end
+      case(id)
+        0: m_seq.start(m_env.agenta.m_sequencer);
+        1: m_seq.start(m_env.agentb.m_sequencer);
+        default: $display("Not supported sequence");
+      endcase
     end
+
     phase.drop_objection(this);
   endtask : run_phase
 
