@@ -16,7 +16,7 @@ always_ff @(posedge clk or negedge rst_n) begin
 	end else begin
 		 a <= a_i;
 		 b <= b_i;
-		 $display("a_i: %d, b_i: %d \n", a_i, b_i);
+		 $display("a_i: %d, b_i: %d, a: %d, b: %d \n", a_i, b_i, a, b);
 	end
 end
 

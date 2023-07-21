@@ -24,8 +24,8 @@ class v1_test extends uvm_test;
     
     phase.raise_objection(this);
 
-    id = m_seq.get_next_seqr_target();
     for(int i = 0; i < count; ++i) begin
+      id = m_seq.get_next_seqr_target();
       case(id)
         0: m_seq.start(m_env.agenta.m_sequencer);
         1: m_seq.start(m_env.agentb.m_sequencer);
