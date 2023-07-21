@@ -23,18 +23,22 @@ class driver extends uvm_driver #(seq_item);
 
   // run phase
   virtual task run_phase(uvm_phase phase);
+    seq_item tx;
     forever begin
-    seq_item_port.get_next_item(req);
+    seq_item_port.get_next_item(tx);
     //respond_to_transfer(req);
-    drive();
+    drive(tx);
     seq_item_port.item_done();
     end
   endtask : run_phase
 
   // drive 
-  virtual task drive();
-    req.print();
-    $display("hey");
+  virtual task drive(seq_item tx);
+    //req.print();
+    //repeat(1) @(posedge clrst_if.clk);
+    @(posedge clrst_if.clk);
+    $display($sformatf("hey: %s, data: %d \n", get_full_name(), tx.rdata));
+    m_data_if.data <= tx.rdata;
     //`uvm_fatal(get_full_name(), "Finish exec");
   endtask : drive
 

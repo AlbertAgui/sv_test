@@ -16,9 +16,9 @@ module testbench;
 
   //test
   initial begin
-    clrst_if.rst_n = 1;
-    repeat (1) @(posedge clrst_if.clk);
     clrst_if.rst_n = 0;
+    repeat (1) @(posedge clrst_if.clk);
+    clrst_if.rst_n = 1;
     repeat (1) @(posedge clrst_if.clk);
   end
 

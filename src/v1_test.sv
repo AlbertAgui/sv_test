@@ -19,7 +19,21 @@ class v1_test extends uvm_test;
   endfunction : build_phase
 
   task run_phase(uvm_phase phase);
-    m_seq.start(m_env.agenta.m_sequencer);
+    int count = 10;
+    int id = -1;
+    
+    phase.raise_objection(this);
+
+    for(int i = 0; i < count; ++i) begin
+      id = m_seq.get_next_seqr_target();
+      case(id)
+        0: m_seq.start(m_env.agenta.m_sequencer);
+        1: m_seq.start(m_env.agentb.m_sequencer);
+        default: $display("Not supported sequence");
+      endcase
+    end
+
+    phase.drop_objection(this);
   endtask : run_phase
 
 endclass : v1_test
