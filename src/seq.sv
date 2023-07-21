@@ -1,7 +1,7 @@
 `ifndef SEQ_SV
 `define SEQ_SV
 
-import "DPI-C" function int sum_object_add(input int a, input int b);
+import "DPI-C" function bit sum_object_add(input int a, input int b);
 import "DPI-C" function int sum_object_getSum();
 
 class seq extends uvm_sequence#(seq_item);
